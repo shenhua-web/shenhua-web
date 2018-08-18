@@ -37,7 +37,7 @@
               <em></em>
               <div class="sys_nav_cont">
                 <i class="sys_nav_icon sys03"></i>
-                <span>预警概览</span>
+                <span>预警条目</span>
               </div>
               <em></em>
             </router-link>
