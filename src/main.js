@@ -23,6 +23,13 @@ Vue.use(ElementUI);
 Vue.prototype.$api = api
 
 
+
+//引入公共头部
+//组件
+import HeaderComponent from './components/Header/HeaderComponent';
+Vue.component('HeaderComponent',HeaderComponent)
+
+
 if (process.env.NODE_ENV === 'production') {
   // 生产环境
   Vue.prototype.$pathUrl = requestUrl.production

@@ -18,7 +18,7 @@
         </el-header>
 
         <el-container class="sys_cont_bot">
-          <el-aside class="pr">
+          <el-aside width="210px" class="pr">
             <h3 class="sys_left_head_tit">隐患列表</h3>
             <div class="sys_left_cont"></div>
           </el-aside>
@@ -235,7 +235,7 @@
           color: $gray;
           transition:.2s all ease;
           &.active,&:hover{
-              color:$font_fff;
+            color:$font_fff;
           }
           em {
             float: left;
