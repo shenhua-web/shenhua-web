@@ -23,7 +23,7 @@
             <div class="sys_left_cont">123</div>
           </el-col>
           <el-col :span="10" class="sys_cont_bot_right">
-            <h3 class="sys_left_head_tit">隐患统计</h3>
+            f
           </el-col>
         </el-row>
 
