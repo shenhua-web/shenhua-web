@@ -54,7 +54,7 @@
                   <span class="crruCrew">当前机组：{{crruCrew}}</span>
                 </div>
               </el-header>
-              <el-main class="item-main">
+              <el-main class="item-main" id="tableWrap">
                 <!-- 筛选条件弹出框 -->
                 <transition name="el-zoom-in-top">
                   <div class="popbox" v-show="showFilter">
@@ -91,7 +91,7 @@
                     <div class="my-col"><div class="text-inner">电网电压</div></div>
                   </div>
                 </div>
-                <div class="table-body">
+                <div class="table-body" id="tableBody">
                   <el-scrollbar style="height:100%" ref="scrollbar">
                     <div class="my-row" v-for="(item,index) in list" :key="index">
                       <div class="my-col"><div class="text-inner">{{item.type}}</div></div>
@@ -199,7 +199,10 @@
 
     computed: {},
 
-    mounted() {},
+    mounted() {
+      let tableHeight =  $('#tableWrap').height() - 18 - 44;
+      $('#tableBody').height(tableHeight);
+    },
 
     methods: {
       //获得 机组选择 tree
@@ -389,6 +392,7 @@
 
           .item-main{
             padding: 9px 11px;
+            overflow: hidden;
             .el-tree{
               background: none;
             }
@@ -517,6 +521,8 @@
 
             .table-body{
               //padding-top: 44px;
+              height: 100%;
+              width: 100%;
             }
 
           }
