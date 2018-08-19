@@ -202,6 +202,9 @@
     mounted() {
       let tableHeight =  $('#tableWrap').height() - 18 - 44;
       $('#tableBody').height(tableHeight);
+
+      //页面渲染之后去掉横向滚动条
+      $('#tableBody .el-scrollbar__wrap').css('overflowX','hidden');
     },
 
     methods: {
