@@ -425,13 +425,28 @@
 
               .my-col{
                 display: inline-flex;
+                text-align: left;
+
+                &:nth-child(1){
+                  width: 16%;
+                }
 
                 &:nth-child(2){
-                  margin: 0 20px 0 14px;
+                  width: 7%;
+                  padding: 0 20px 0 14px;
+                }
+
+                &:nth-child(3){
+                  width: 14%;
                 }
 
                 &:nth-child(4){
-                  margin: 0 29px 0 23px;
+                  width: 13%;
+                  padding: 0 29px 0 23px;
+                }
+
+                &:nth-child(5){
+                  width: 50%;
                 }
               }
             }
