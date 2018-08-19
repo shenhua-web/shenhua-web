@@ -206,6 +206,7 @@
         this.warnList = warn
       },
       recordedList(){
+        this.reset();
         this.getTroubleData()
         alert("刷新啦！")
       },
@@ -216,6 +217,14 @@
         this.filterClick();
         this.getTroubleData();
         alert("查询成功！")
+      },
+      reset(){
+        this.showFilter = false
+        this.beginTime = ""
+        this.endTime = ""
+        this.windName = 0
+        this.fanName = 0
+        this.warnName = 0
       }
     }
   }
@@ -286,20 +295,6 @@
           color: $font_fff;
           font-size: $font_18;
           margin-top: 20px;
-          &.sub{
-            position: absolute;
-            left: 0;
-            top: 0;
-          }
-        }
-
-        .refresh_btn {
-          display: inline-block;
-          vertical-align: middle;
-          width: 26px;
-          height: 26px;
-          margin-top: 15px;
-          background: url("../assets/icon/refresh_btn.png") no-repeat;
         }
       }
 
