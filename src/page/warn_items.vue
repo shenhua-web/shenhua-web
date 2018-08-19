@@ -23,7 +23,7 @@
                 <i class="icon_recorded" @click="recordedList"></i>
               </div>
             </el-header>
-            <el-main class="sys_main_main">
+            <el-main class="sys_main_main" id="tableWrap">
               <!-- 筛选条件弹出框 -->
               <transition name="el-zoom-in-top">
                 <div class="popbox" v-show="showFilter">
@@ -84,15 +84,17 @@
                 </div>
               </transition>
               <!-- 列表 内容 -->
-              <el-scrollbar style="height:100%" ref="scrollbar">
-                <div class="my-row" v-for="(item,index) in list" :key="index">
-                  <div class="my-col">{{item.name}}</div>
-                  <div class="my-col">{{item.type}}</div>
-                  <div class="my-col">{{item.day + ' '+ item.time}}</div>
-                  <div class="my-col">{{item.module}}</div>
-                  <div class="my-col">{{item.info}}</div>
-                </div>
-              </el-scrollbar>
+              <div id="tableBody" class="table-body">
+                <el-scrollbar style="height:100%" ref="scrollbar">
+                  <div class="my-row" v-for="(item,index) in list" :key="index">
+                    <div class="my-col">{{item.name}}</div>
+                    <div class="my-col">{{item.type}}</div>
+                    <div class="my-col">{{item.day + ' '+ item.time}}</div>
+                    <div class="my-col">{{item.module}}</div>
+                    <div class="my-col">{{item.info}}</div>
+                  </div>
+                </el-scrollbar>
+              </div>
             </el-main>
           </el-container>
         </el-main>
@@ -135,7 +137,8 @@
     computed: {},
 
     mounted() {
-
+      let tableHeight =  $('#tableWrap').height() - 18;
+      $('#tableBody').height(tableHeight);
 
     },
 
@@ -363,6 +366,10 @@
             padding: 9px 11px;
             border-radius: 5px;
             position: relative;
+
+            .table-body{
+              overflow: hidden;
+            }
 
             .popbox{
               position: absolute;
