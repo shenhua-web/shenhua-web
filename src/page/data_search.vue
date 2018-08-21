@@ -3,7 +3,7 @@
   <div id="search">
     <header-component class="herderBox"></header-component>
     <!--主页content-->
-    <section class="sys_content">
+    <section class="sys_content" id="contWrap">
       <el-container class="sys_cont_sub">
         <el-header class="sys_cont_head">
           <el-row>
@@ -12,10 +12,12 @@
         </el-header>
 
         <!-- 内容 容器-->
-        <el-main class="sys_cont_main">
+        <el-main class="sys_cont_main" id="subWrap">
           <div class="left-wrap fl">
             <el-container class="item-wrap crew-wrap">
-              <el-header class="item-header" height="45px">机组选择</el-header>
+              <el-header class="item-header" height="45px">
+                <div class="head-bg">数据点选择</div>
+              </el-header>
               <el-main class="item-main">
                 <el-scrollbar style="height:100%" ref="scrollbar">
                   <el-tree
@@ -31,7 +33,9 @@
           </div>
           <div class="mid-wrap fl">
             <el-container class="item-wrap dataPoint-wrap">
-              <el-header class="item-header" height="45px">数据点选择</el-header>
+              <el-header class="item-header" height="45px">
+                <div class="head-bg">数据点选择</div>
+              </el-header>
               <el-main class="item-main">
                 <el-scrollbar style="height:100%" ref="scrollbar">
                   <el-tree
@@ -48,10 +52,12 @@
           <div class="right-wrap fl">
             <el-container class="item-wrap special-item">
               <el-header class="item-header" height="45px">
-                <div class="left-box fl" @click="filterClick">
-                  <span>数据列表</span>
-                  <i :class="{icon_arrow: true, icon_up: showFilter}"></i>
-                  <span class="crruCrew">当前机组：{{crruCrew}}</span>
+                <div class="head-bg">
+                  <div class="left-box fl" @click="filterClick">
+                    <span>数据列表</span>
+                    <i :class="{icon_arrow: true, icon_up: showFilter}"></i>
+                    <span class="crruCrew">当前机组：{{crruCrew}}</span>
+                  </div>
                 </div>
               </el-header>
               <el-main class="item-main" id="tableWrap">
@@ -150,6 +156,24 @@
         },
       ]
     },
+    {
+      id: 3,
+      label: '一级 3',
+      children: [
+        {
+          id: 21,
+          label: '三级 3-1',
+        },
+        {
+          id: 22,
+          label: '三级 3-2',
+        },
+        {
+          id: 23,
+          label: '三级 3-3',
+        },
+      ]
+    },
   ]
   const g_template = {
     id: 0,
@@ -200,11 +224,9 @@
     computed: {},
 
     mounted() {
-      let tableHeight =  $('#tableWrap').height() - 18 - 44;
-      $('#tableBody').height(tableHeight);
-
-      //页面渲染之后去掉横向滚动条
-      $('#tableBody .el-scrollbar__wrap').css('overflowX','hidden');
+      let tableHeight =  $('#contWrap').height() - (94 + 15 * 2 + 60);
+      $('#tableBody').height(tableHeight - 44);
+      $('#subWrap').height(tableHeight + 60);
     },
 
     methods: {
@@ -274,6 +296,15 @@
 </script>
 <style lang='scss'>
   #search{
+    .el-scrollbar__bar.is-horizontal{
+      display: none;
+    }
+
+    .el-scrollbar__wrap{
+      overflow-x: hidden;
+      margin-bottom: 0!important;
+    }
+
     .popbox{
       .el-input__inner{
         height: 30px;
@@ -373,7 +404,6 @@
         border: 1px solid #0c1016;
         border-top: 0;
         padding: 9px;
-        height: 100%;
         width: 100%;
         border-radius: 5px;
 
@@ -386,11 +416,23 @@
 
           .item-header{
             line-height: 45px;
-            padding-left: 18px;
-            background-image: linear-gradient(to bottom, #4d4d4d, #040406);
             border: 1px solid #181818;
             font-size: 14px;
             color: #fff;
+            padding: 0;
+            overflow: hidden;
+
+            .head-bg{
+              width: 100%;
+              height: 100%;
+              filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#4d4d4d, endColorstr=#040406);/*IE<9>*/
+              background: linear-gradient(to bottom, #4d4d4d, #040406);
+              padding: 0 18px;
+            }
+
+            .left-box{
+              height: 100%;
+            }
           }
 
           .item-main{
@@ -472,8 +514,8 @@
               line-height: 44px;
               color: #fff;
               font-size: 14px;
-              display: flex;
-              flex-direction: row;
+              // display: flex;
+              // flex-direction: row;
               overflow: hidden;
 
               &:nth-child(2n){
@@ -481,7 +523,8 @@
               }
 
               .my-col{
-                display: inline-flex;
+                //display: inline-flex;
+                float: left;
 
                 .text-inner{
                   text-align: center;

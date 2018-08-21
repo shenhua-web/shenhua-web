@@ -3,7 +3,7 @@
   <div id="warnItems">
     <header-component class="herderBox"></header-component>
     <!--主页content-->
-    <section class="sys_content">
+    <section class="sys_content" id="contWrap">
       <el-container class="sys_cont_sub">
         <el-header class="sys_cont_head">
           <el-row>
@@ -13,14 +13,16 @@
 
         <!-- 列表 容器-->
         <el-main class="sys_cont_main">
-          <el-container class="sys_main_wrap">
+          <el-container class="sys_main_wrap" id="subWrap">
             <el-header class="sys_main_head" height="45px">
-              <div class="left-box fl" @click="filterClick">
-                <span>隐患列表</span>
-                <i :class="{icon_arrow: true, icon_up: showFilter}"></i>
-              </div>
-              <div class="right-box fr">
-                <i class="icon_recorded" @click="recordedList"></i>
+              <div class="head-bg">
+                <div class="left-box fl" @click="filterClick">
+                  <span>隐患列表</span>
+                  <i :class="{icon_arrow: true, icon_up: showFilter}"></i>
+                </div>
+                <div class="right-box fr">
+                  <i class="icon_recorded" @click="recordedList"></i>
+                </div>
               </div>
             </el-header>
             <el-main class="sys_main_main" id="tableWrap">
@@ -137,12 +139,8 @@
     computed: {},
 
     mounted() {
-      let tableHeight =  $('#tableWrap').height() - 18;
+      let tableHeight =  $('#contWrap').height() - (94 + 15 * 2 + 60);
       $('#tableBody').height(tableHeight);
-
-      //页面渲染之后去掉横向滚动条
-      $('#tableBody .el-scrollbar__wrap').css('overflowX','hidden');
-
     },
 
     methods: {
@@ -238,6 +236,12 @@
 </script>
 <style lang='scss'>
   #warnItems{
+    #tableBody{
+      .el-scrollbar__wrap{
+        overflow-x: hidden;
+      }
+    }
+
     .popbox{
       .el-input__inner{
         height: 30px;
@@ -309,8 +313,8 @@
         border: 1px solid #0c1016;
         border-top: 0;
         padding: 9px;
-        height: 100%;
-        width: 100%;
+        // height: 100%;
+        // width: 100%;
         border-radius: 5px;
 
         .sys_main_wrap{
@@ -319,12 +323,20 @@
 
           .sys_main_head{
             line-height: 45px;
-            padding-left: 18px;
-            background-image: linear-gradient(to bottom, #4d4d4d, #040406);
             border-radius: 8px 8px 0 0;
             border: 1px solid #181818;
             font-size: 14px;
             color: #fff;
+            padding: 0;
+            overflow: hidden;
+
+            .head-bg{
+              width: 100%;
+              height: 100%;
+              filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#4d4d4d, endColorstr=#040406);/*IE<9>*/
+              background: linear-gradient(to bottom, #4d4d4d, #040406);
+              padding: 0 18px;
+            }
 
             .left-box{
               cursor: pointer;
@@ -419,8 +431,8 @@
               line-height: 44px;
               color: #fff;
               font-size: 14px;
-              display: flex;
-              flex-direction: row;
+              // display: flex;
+              // flex-direction: row;
               padding-left: 20px;
               overflow: hidden;
 
@@ -429,7 +441,8 @@
               }
 
               .my-col{
-                display: inline-flex;
+                //display: inline-flex;
+                float: left;
                 text-align: left;
 
                 &:nth-child(1){
